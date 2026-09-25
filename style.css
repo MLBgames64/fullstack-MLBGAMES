@@ -82,3 +82,15 @@ h2 {
     color: #daeed5b9;
     margin-bottom: 20px;
 }
+
+
+#fondo{
+  
+  position: fixed;
+  left: 0%;
+  top: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
