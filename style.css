@@ -51,6 +51,20 @@ h2 {
 }
 
 
+.Tarjeta-juego {
+    align-items: center;
+    text-align: center;
+    background-color: #1a1926;
+    
+    
+
+}
+
+article img {
+    height: 200px;
+    
+}
+
 #fondo{
   
   position: fixed;
