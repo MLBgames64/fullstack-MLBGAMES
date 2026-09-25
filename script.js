@@ -10,4 +10,6 @@ formulario.addEventListener("subit",function(evento){
     window.location.href="index.html";
 });
 
-const
+document.getElementById("btnvolver").addEventListener("click", function(){
+    window.history.back()
+});
