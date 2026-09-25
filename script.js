@@ -1,7 +1,7 @@
 //redirigir al iniciar secion al index.html
 const formulario = document.getElementById (formlogin);
 
-formulario.addEventListener("subit",function(evento){
+if (formulario) {formulario.addEventListener("submit",function(evento){
     evento.preventDefault();
 
     const correo = document.getElementById("correo").value;
@@ -9,6 +9,7 @@ formulario.addEventListener("subit",function(evento){
 
     window.location.href="index.html";
 });
+}
 
 document.getElementById("btnvolver").addEventListener("click", function(){
     window.history.back()
