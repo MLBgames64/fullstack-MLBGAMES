@@ -49,3 +49,22 @@ h2 {
     color: #daeed5b9;
     margin-bottom: 20px;
 }
+
+
+
+
+/* Estilos individuales para cada tarjeta */
+.Tarjeta-juego {
+    align-items: center;
+    text-align: center;
+    background-color: #1a1926;
+    
+    
+
+}
+
+article img {
+    height: 200px;
+    
+}
+
