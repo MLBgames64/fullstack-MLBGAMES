@@ -8,3 +8,33 @@ const listaProductos = [
     { id: 6, nombre: "Baldur's Gate 3", precio: "$49.990", imagen: "img/BG3.jpg" }
 ];
 
+
+function cargarProductos() {
+    const contenedor = document.getElementById("contenedor-productos");
+
+  
+    if (!contenedor) return;
+
+    contenedor.innerHTML = ""; 
+
+    listaProductos.forEach((producto) => {
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("Tarjeta-juego");
+
+        tarjeta.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <h3>${producto.nombre}</h3>
+            <p class="precio">${producto.precio}</p>
+            <button onclick="agregarAlCarrito(${producto.id})">Añadir al carrito</button>
+        `;
+
+        contenedor.appendChild(tarjeta);
+    });
+}
+
+function agregarAlCarrito(id) {
+    const producto = listaProductos.find(p => p.id === id);
+    alert(`"${producto.nombre}" agregado al carrito.`);
+}
+
+document.addEventListener("DOMContentLoaded", cargarProductos);
