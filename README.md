@@ -1,36 +1,16 @@
-# Pixel Store - MLBGAMES
+# React + Vite
 
-Tienda online de videojuegos desarrollada como proyecto frontend para la asignatura **Desarrollo Fullstack II (DSY1104)**.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Estructura del Proyecto
+Currently, two official plugins are available:
 
-fullstack-MLBGAMES/
--index.html # Página principal con juegos destacados
--contacto.html # Formulario de contacto con validación
--inicioSesion.html # Formulario de inicio de sesión
--registro.html # Formulario de registro de usuario
--style.css # Hoja de estilos externa
--Lista_Juegos.js # Array de productos y carga dinámica al DOM
--contacto.js # Validación del formulario de contacto
--inicioSesion.js # Validación del formulario de inicio de sesión
--register.js # Validación del formulario de registro
--img # Imágenes de los juegos y fondo
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
+## React Compiler
 
-## Tecnologías Utilizadas
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-- HTML5 semántico
-- CSS externo con diseño responsivo
-- JavaScript vanilla para lógica y validaciones
+## Expanding the ESLint configuration
 
-## Funcionalidades
-
-- Lista de juegos cargado dinámicamente desde un arreglo JS
-- Validación en tiempo real en formulario de contacto
-- Restricción de dominios de correo: `@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`
-- Navegación entre páginas con menú superior
-- Diseño responsivo con grid CSS
-
-## Equipo
-
-Proyecto desarrollado por el equipo **MLBGAMES**.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
