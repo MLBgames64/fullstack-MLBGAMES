@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatearPrecio } from "../utils/formatearPrecio.js";
+import { calcularDescuento } from "../utils/calcularDescuento.js";
 
 export default function TarjetaJuego({ juego, onAgregar = () => {} }) {
   const enOferta = juego.precioOferta !== null && juego.precioOferta !== undefined;
@@ -25,6 +26,9 @@ export default function TarjetaJuego({ juego, onAgregar = () => {} }) {
                 {formatearPrecio(juego.precio)}
               </span>
               <span className="fw-bold text-success">{formatearPrecio(juego.precioOferta)}</span>
+              <span className="badge bg-danger ms-2">
+                -{calcularDescuento(juego.precio, juego.precioOferta)}%
+              </span>
             </>
           ) : (
             <span className="fw-bold">{formatearPrecio(juego.precio)}</span>
