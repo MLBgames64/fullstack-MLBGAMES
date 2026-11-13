@@ -8,14 +8,22 @@ export const DOMINIOS_PERMITIDOS = [
 
 const FORMATO_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Concuerda el verbo y el adjetivo con el artículo: "La contraseña es obligatoria".
+function frase(etiqueta) {
+  const articulo = etiqueta.trim().split(" ")[0].toLowerCase();
+  if (articulo === "los") return `${etiqueta} son obligatorios.`;
+  if (articulo === "las") return `${etiqueta} son obligatorias.`;
+  if (articulo === "la") return `${etiqueta} es obligatoria.`;
+  return `${etiqueta} es obligatorio.`;
+}
+
 // Devuelve "" si el valor está bien, o el mensaje de error si no.
 export function validarObligatorio(valor, etiqueta) {
   if (!valor || valor.trim() === "") {
-    return `${etiqueta} es obligatorio.`;
+    return frase(etiqueta);
   }
   return "";
 }
-
 export function validarNombre(nombre) {
   const vacio = validarObligatorio(nombre, "El nombre");
   if (vacio) return vacio;
