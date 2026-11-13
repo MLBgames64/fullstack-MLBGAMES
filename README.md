@@ -131,3 +131,24 @@ Si los datos se ven raros durante el desarrollo, ejecuta `localStorage.clear()` 
 - No se hacen commits directos a `main`: los cambios se integran con Pull Request.
 - Commits pequeños y con mensajes descriptivos (por ejemplo, `feat: carrito suma el total`).
 - Cada integrante edita solo los archivos de su responsabilidad para evitar conflictos.
+
+## Pruebas unitarias (Karma + Jasmine)
+
+Las pruebas se escriben con **Jasmine** y se ejecutan con **Karma** en Chrome.
+
+| Comando | Qué hace |
+|---|---|
+| `npm test` | Abre una ventana real de Chrome con Karma y corre todas las pruebas (modo demostración). |
+| `npm run test:ci` | Chrome sin ventana, una sola ejecución, con reporte de cobertura. |
+
+- Los archivos de prueba se llaman `*.spec.js` o `*.spec.jsx` y viven junto al código que prueban, dentro de `src/`.
+- El reporte de cobertura queda en consola (resumen) y en `coverage/html/index.html` (ábrelo en el navegador).
+- Para probar un componente usa el helper `renderizar` de `src/test/renderizar.jsx`:
+
+  ```jsx
+  import { renderizar } from "../test/renderizar.jsx";
+
+  renderizar(<MiComponente />);                 // componente sin rutas
+  renderizar(<MiComponente />, { ruta: "/" });  // componente que usa Link o useParams
+  ```
+- Requisito: tener Google Chrome instalado.
