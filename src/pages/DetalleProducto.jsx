@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { obtenerJuego } from "../data/juegos.js";
 import { formatearPrecio } from "../utils/formatearPrecio.js";
 import { calcularDescuento } from "../utils/calcularDescuento.js";
+import { useCarrito } from "../context/useCarrito.js";
 
 export default function DetalleProducto() {
   const { id } = useParams();
   const juego = obtenerJuego(id);
   const [cantidad, setCantidad] = useState(1);
-
+  const { agregar } = useCarrito();
+  
   if (!juego) {
     return (
       <div className="container py-4">
@@ -33,9 +35,14 @@ export default function DetalleProducto() {
   }
 
   function agregarAlCarrito() {
-    // TEMPORAL: Martín lo reemplaza por el carrito real (juego + cantidad)
-    alert(`${cantidad} x "${juego.nombre}" agregado al carrito.`);
-  }
+  console.log("Juego:", juego);
+  console.log("Cantidad:", cantidad);
+
+  agregar(juego, cantidad);
+
+  console.log("Se ejecutó agregar()");
+  alert("Se ejecutó la función de agregar.");
+}
 
   return (
     <div className="container py-4">

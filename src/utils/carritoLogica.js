@@ -1,10 +1,16 @@
 // Lógica pura del carrito: recibe una lista de items y devuelve una lista NUEVA.
 // No usa React, así se puede probar sola.
+
 const CLAVE_CARRITO = "mlbgames_carrito";
 
-export function leerCarrito() {
+function obtenerClaveCarrito(usuarioId = "invitado") {
+  return `${CLAVE_CARRITO}_${usuarioId}`;
+}
+
+export function leerCarrito(usuarioId = "invitado") {
   try {
-    const guardado = localStorage.getItem(CLAVE_CARRITO);
+    const guardado = localStorage.getItem(obtenerClaveCarrito(usuarioId));
+
     if (guardado) {
       const datos = JSON.parse(guardado);
       if (Array.isArray(datos)) return datos;
@@ -12,16 +18,21 @@ export function leerCarrito() {
   } catch (error) {
     console.error("No se pudo leer el carrito", error);
   }
+
   return [];
 }
 
-export function guardarCarrito(items) {
+export function guardarCarrito(items, usuarioId = "invitado") {
   try {
-    localStorage.setItem(CLAVE_CARRITO, JSON.stringify(items));
+    localStorage.setItem(
+      obtenerClaveCarrito(usuarioId),
+      JSON.stringify(items)
+    );
   } catch (error) {
     console.error("No se pudo guardar el carrito", error);
   }
 }
+
 
 // El precio que se cobra: el de oferta si existe, si no el normal.
 export function precioEfectivo(juego) {

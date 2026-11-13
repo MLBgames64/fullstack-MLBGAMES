@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useContext } from "react";
 import { CarritoCtx } from "./carritoContexto.js";
+import { SesionCtx } from "./sesionContexto.js";
 import { obtenerJuego } from "../data/juegos.js";
+
 import {
   agregarItem,
   calcularCantidadTotal,
@@ -11,17 +14,31 @@ import {
   quitarItem,
 } from "../utils/carritoLogica.js";
 
+// Identifica qué usuario está conectado.
 export function CarritoProvider({ children }) {
-  // Estado: la lista de items. Parte con lo que haya guardado en localStorage.
-  const [items, setItems] = useState(() => leerCarrito());
+  const { usuario } = useContext(SesionCtx);
+  const usuarioId = usuario?.id ?? "invitado";
 
-  // Cada vez que cambian los items, se guardan en localStorage.
+  return (
+    <CarritoInterno key={usuarioId} usuarioId={usuarioId}>
+      {children}
+    </CarritoInterno>
+  );
+}
+
+// Maneja el carrito del usuario identificado.
+function CarritoInterno({ children, usuarioId }) {
+  const [items, setItems] = useState(() => leerCarrito(usuarioId));
+
+  // Guarda los cambios en el carrito de este usuario.
   useEffect(() => {
-    guardarCarrito(items);
-  }, [items]);
+    guardarCarrito(items, usuarioId);
+  }, [items, usuarioId]);
 
   function agregar(juego, cantidad = 1) {
-    setItems((anteriores) => agregarItem(anteriores, juego, cantidad));
+    setItems((anteriores) =>
+      agregarItem(anteriores, juego, cantidad)
+    );
   }
 
   function quitar(id) {
@@ -29,9 +46,11 @@ export function CarritoProvider({ children }) {
   }
 
   function cambiarCantidad(id, cantidad) {
-    // El item no guarda el stock, así que lo consultamos en juegos.js.
     const stock = obtenerJuego(id)?.stock ?? Infinity;
-    setItems((anteriores) => cambiarCantidadItem(anteriores, id, cantidad, stock));
+
+    setItems((anteriores) =>
+      cambiarCantidadItem(anteriores, id, cantidad, stock)
+    );
   }
 
   function vaciar() {
@@ -48,5 +67,9 @@ export function CarritoProvider({ children }) {
     cantidadTotal: calcularCantidadTotal(items),
   };
 
-  return <CarritoCtx.Provider value={valor}>{children}</CarritoCtx.Provider>;
+  return (
+    <CarritoCtx.Provider value={valor}>
+      {children}
+    </CarritoCtx.Provider>
+  );
 }
